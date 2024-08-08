@@ -15,24 +15,24 @@ function Layout({ children }) {
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div className="collapse navbar-collapse" id="navbarCollapse">
                             { auth.user
                                 
-                                ?   <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                                        <li class="nav-item">
-                                            <Link class="nav-link" href="/dashboard">DASHBOARD</Link>
+                                ?   <ul className="navbar-nav me-auto mb-2 mb-md-0">
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/dashboard">DASHBOARD</Link>
                                         </li>
-                                        <li class="nav-item">
-                                            <Link class="nav-link" href="/logout" method="POST">LOGOUT</Link>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/logout" method="POST">LOGOUT</Link>
                                         </li>
                                     </ul>
                                 
-                                :   <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                                        <li class="nav-item">
-                                            <Link class="nav-link" href="/login">LOGIN</Link>
+                                :   <ul className="navbar-nav ms-auto mb-2 mb-md-0">
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/login">LOGIN</Link>
                                         </li>
-                                        <li class="nav-item">
-                                            <Link class="nav-link" href="/register">REGISTER</Link>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/register">REGISTER</Link>
                                         </li>
                                     </ul>
                             }

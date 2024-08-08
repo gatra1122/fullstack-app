@@ -8,7 +8,7 @@ import { Button, TextField } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
-function Register() {
+function Login() {
 
     //destruct props "errors"
     const { errors } = usePage().props;
@@ -23,7 +23,7 @@ function Register() {
     const storeRegister = async(e) => {
         e.preventDefault();
         
-        Inertia.post('/register', {
+        Inertia.post('/login', {
             //data
             name: name,
             email: email,
@@ -36,7 +36,7 @@ function Register() {
         <>
             {/* <Layout> Untuk tampilan partial </Layout> */}
             <Head>
-                <title>Register Akun | Nama Aplikasi</title>
+                <title>Masuk | Nama Aplikasi</title>
             </Head>
 
             <div>
@@ -159,4 +159,4 @@ function Register() {
 
 }
 
-export default Register
+export default Login

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -24,27 +25,22 @@ class RegisterController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         /**
          * validate request
          */
-        $this->validate($request, [
-            'name'      => 'required',
-            'email'     => 'required|unique:users',
-            'password'  => 'required|confirmed'
-        ]);
+        $data = $request->validated();
 
         /**
          * create user
          */
         User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => bcrypt($request->password)
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
         ]);
 
-        //redirect
         return redirect('/login')->with('status', 'Register Berhasil!');
     }
 }
