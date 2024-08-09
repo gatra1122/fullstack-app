@@ -29,10 +29,10 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 });
 
 Route::group(['middleware' => ['guest']], function () {
+//Login
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::post('/', [LoginController::class, 'store']);
 //Register
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
-//Login
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'store']);
 });

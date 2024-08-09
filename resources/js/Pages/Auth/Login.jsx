@@ -11,7 +11,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 function Login() {
 
     //destruct props "errors"
-    const { errors } = usePage().props;
+    const { errors } = usePage(null).props;
 
     //define state
     const [email, setEmail] = useState('');
@@ -20,7 +20,8 @@ function Login() {
     //method "storeLogin"
     const storeLogin  = async(e) => {
         e.preventDefault();
-        
+
+        console.log('LOADING: TRUE');
         Inertia.post('/login', {
             //data
             email: email,
@@ -44,14 +45,20 @@ function Login() {
                         />
                     </div>
 
-                    <form className="animate-fade-down animate-once animate-duration-200 max-w-xl w-full p-6 mx-auto" onSubmit={storeLogin}>
+                    <form
+                        className="animate-fade-down animate-once animate-duration-200 max-w-xl w-full p-6 mx-auto"
+                        onSubmit={storeLogin}
+                    >
                         <div className="mb-12">
                             <h3 className="cursor-default text-gray-800 text-4xl font-extrabold">
                                 Masuk
                             </h3>
                             <p className="text-gray-800 text-sm mt-6">
                                 Belum punya akun ?
-                                <Link href="/register" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
+                                <Link
+                                    href="/register"
+                                    className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
+                                >
                                     Daftar disini
                                 </Link>
                             </p>
@@ -74,11 +81,7 @@ function Login() {
                                 variant="standard"
                                 label="Email"
                                 placeholder="Masukkan alamat email"
-                                error={
-                                    errors != null && errors.email
-                                        ? "error"
-                                        : ""
-                                }
+                                error={errors.email ? 1 : 0}
                                 required
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -92,11 +95,7 @@ function Login() {
                                 variant="standard"
                                 label="Password"
                                 placeholder="Masukkan password"
-                                error={
-                                    errors != null && errors.password
-                                        ? "error"
-                                        : ""
-                                }
+                                error={errors.password ? 1 : 0}
                                 required
                             />
                         </div>

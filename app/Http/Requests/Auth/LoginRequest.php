@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Email wajib diisi !',
+            'email.exists' => 'Email yang anda masukkan tidak ada.',
         ];
     }
 }

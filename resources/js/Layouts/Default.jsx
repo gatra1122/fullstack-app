@@ -1,49 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/inertia-react';
+// import Navbar from './widgets/Navbar';
+import {Navbar,Footer, Sidebar} from './widgets';
 
 function Layout({ children }) {
 
     //destruct props "auth"
-    const { auth } = usePage().props;    
+    const { auth } = usePage().props;
+    const [toggleSide, setToggleSide] = useState(true);
+
+    function showSide(){
+        setToggleSide(!toggleSide)
+    }
 
     return (
         <>
-            <header>
-                <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                    <div className="container">
-                        <Link className="navbar-brand" href="/">LARAVEL + INERTIA.JS</Link>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        { auth.user
-                                
-                                ?   <ul className="navbar-nav me-auto mb-2 mb-md-0">
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/dashboard">DASHBOARD</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/logout" method="POST">LOGOUT</Link>
-                                        </li>
-                                    </ul>
-                                
-                                :   <ul className="navbar-nav ms-auto mb-2 mb-md-0">
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/login">LOGIN</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/register">REGISTER</Link>
-                                        </li>
-                                    </ul>
-                            }
+            <div className="flex">
+                <aside hidden={toggleSide ? 1 : 0}>
+                        <Sidebar></Sidebar>
+                </aside>
+                <main className="flex flex-col h-screen w-full">
+                    <div className='flex'>
+                    <button type='button' className='bg-green-500 px-2' onClick={showSide}>Show/Hide</button>
+                    <Navbar></Navbar>
                     </div>
-                </nav>
-            </header>
-
-            <main className="container" style={{ marginTop: '100px' }}>
-                {children}
-            </main>
+                    <div className="bg-yellow-100 h-full">{children}</div>
+                    <div className="">
+                        <Footer></Footer>
+                    </div>
+                </main>
+            </div>
         </>
-    )
+    );
 
 }
 

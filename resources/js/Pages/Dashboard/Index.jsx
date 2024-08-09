@@ -10,21 +10,17 @@ function Dashboard() {
     return (
         <>
             <Head>
-                <title>Dashboard - SantriKoding.com</title>
+                <title>Dashboard</title>
             </Head>
             <Layout>
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <div class="card border-0 rounded-3 shadow-sm">
-                            <div class="card-body">
-                                Selamat Datang <strong>{auth.user.name}</strong>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    Selamat Datang <strong>{auth.user.name}</strong>
+                    <br />
+                    Ini bagian konten
                 </div>
             </Layout>
         </>
-    )
+    );
 
 }
 

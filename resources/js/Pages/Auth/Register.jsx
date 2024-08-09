@@ -84,9 +84,7 @@ function Register() {
                                 variant="standard"
                                 label="Nama"
                                 placeholder="Masukkan nama anda"
-                                error={
-                                    errors != null && errors.name ? "error" : ""
-                                }
+                                error={ errors.name ? 1 : 0 }
                                 required
                                 onChange={(e) => setName(e.target.value)}
                             />
@@ -99,11 +97,7 @@ function Register() {
                                 variant="standard"
                                 label="Email"
                                 placeholder="Masukkan alamat email"
-                                error={
-                                    errors != null && errors.email
-                                        ? "error"
-                                        : ""
-                                }
+                                error={ errors.email? 1 : 0 }
                                 required
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -117,11 +111,7 @@ function Register() {
                                 variant="standard"
                                 label="Password"
                                 placeholder="Masukkan password"
-                                error={
-                                    errors != null && errors.password
-                                        ? "error"
-                                        : ""
-                                }
+                                error={ errors.password ? 1 : 0 }
                                 required
                             />
                         </div>
@@ -133,15 +123,9 @@ function Register() {
                                 variant="standard"
                                 label="Konfirmasi Password"
                                 placeholder="Konfirmasi password"
-                                error={
-                                    errors != null && errors.password
-                                        ? "error"
-                                        : ""
-                                }
+                                error={ errors.password ? 1 : 0 }
                                 required
-                                onChange={(e) =>
-                                    setPasswordConfirmation(e.target.value)
-                                }
+                                onChange={(e) => setPasswordConfirmation(e.target.value) }
                             />
                         </div>
 
