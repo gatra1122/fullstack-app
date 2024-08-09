@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite --port 3000",
-        "build": "vite build"
+        "build": "vite build",
+        "start": "concurrently  \"php artisan config:cache\" \"php artisan serve\" \"npm run dev \"  "
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
@@ -16,6 +17,10 @@
         "@emotion/react": "^11.13.0",
         "@emotion/styled": "^11.13.0",
         "@fontsource/roboto": "^5.0.14",
+        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/react-fontawesome": "^0.2.2",
+        "@heroicons/react": "^2.1.5",
         "@inertiajs/inertia-react": "^0.8.1",
         "@inertiajs/progress": "^0.2.7",
         "@inertiajs/react": "^1.2.0",

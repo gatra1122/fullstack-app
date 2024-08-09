@@ -8,50 +8,18 @@ function Navbar() {
 
     return (
         <>
-            <div className='flex w-full'>
-                <span>
-                    INI NAVBAR <strong>{auth.user.name}</strong>
-                </span>
-                {auth.user ? (
-                                <ul className="flex flex-row">
-                                    <li className="">
-                                        <Link
-                                            className="nav-link"
-                                            href="/dashboard"
-                                        >
-                                            DASHBOARD
-                                        </Link>
-                                    </li>
-                                    <li className="">
-                                        <Link
-                                            className="nav-link"
-                                            href="/logout"
-                                            method="POST"
-                                        >
-                                            LOGOUT
-                                        </Link>
-                                    </li>
-                                </ul>
-                            ) : (
-                                <ul className="navbar-nav ms-auto mb-2 mb-md-0">
-                                    <li className="">
-                                        <Link
-                                            className="nav-link"
-                                            href="/login"
-                                        >
-                                            LOGIN
-                                        </Link>
-                                    </li>
-                                    <li className="">
-                                        <Link
-                                            className="nav-link"
-                                            href="/register"
-                                        >
-                                            REGISTER
-                                        </Link>
-                                    </li>
-                                </ul>
-                            )}
+            <div className="flex w-full items-center justify-center md:justify-between">
+                <div>DASHBOARD</div>
+                <ul className="flex flex-row gap-2 mr-[15px]">
+                    <li>
+                        Hallo, <strong>{auth.user.name}</strong>
+                    </li>
+                    <li className="">
+                        <Link className="nav-link" href="/logout" method="POST">
+                            LOGOUT
+                        </Link>
+                    </li>
+                </ul>
             </div>
         </>
     );

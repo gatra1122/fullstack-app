@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/inertia-react';
 import {Navbar,Footer, Sidebar} from './widgets';
-import { ArrowRight, Dehaze, ArrowLeft } from '@mui/icons-material';
-import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 function Layout({ children }) {
 
@@ -16,22 +16,27 @@ function Layout({ children }) {
     return (
         <>
             <div className="flex h-screen overflow-hidden">
-                <aside className={(toggleSide ? 'w-0' : 'w-[18rem]') + " max-[640px]:w-0 flex-none overflow-hidden transition-all duration-100 ease-out"}>
+                <aside
+                    className={
+                        (toggleSide ? "w-0" : "w-[18rem]") +
+                        " max-[640px]:w-0 flex-none overflow-hidden transition-all duration-200 ease-in-out text-gray-300"
+                    }
+                >
                     <Sidebar></Sidebar>
                 </aside>
                 <main className="flex flex-col w-full">
-                    <div className="flex-none bg-[#ADBBDA]  h-16">
+                    <div className="flex h-16 border-solid border-b border-gray-300">
                         <button
                             type="button"
                             onClick={showSide}
-                            className="px-2"
+                            className="hover:opacity-70 transition-all ease-in-out text-gray-700 text-2xl mx-2"
                         >
-                            <Dehaze sx={{ fontSize: 40 }}></Dehaze>
+                            <FontAwesomeIcon icon={faBars}/>
                         </button>
                         <Navbar></Navbar>
                     </div>
-                    <div className="flex-grow bg-[#EDE8F5] p-5">{children}</div>
-                    <div className="flex-none">
+                    <div className="flex-grow p-5">{children}</div>
+                    <div className="flex-none py-2 border-solid border-t border-gray-300">
                         <Footer></Footer>
                     </div>
                 </main>

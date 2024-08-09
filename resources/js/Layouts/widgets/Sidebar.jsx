@@ -1,33 +1,29 @@
 import React, { useState } from 'react';
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Home } from '@mui/icons-material';
+import { Link } from '@inertiajs/inertia-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faTable } from '@fortawesome/free-solid-svg-icons';
 
-function Sidebar(properti) {
-    const [hideSidebar, setHideSidebar] = useState();
+function Sidebar() {
 
     return (
         <>
-        <div className="bg-purple-100 h-screen w-full">
-          <div className='bg-red-100 py-4 text-center'>
-            APLIKASI
-          </div>
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Home />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Data Table" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        </div>
-
+            <div className="bg-gray-700 h-screen w-full">
+                <div className="py-5 text-center">APLIKASI</div>
+                <ul className="bg-gray-600">
+                    <Link href="/dashboard">
+                        <li className="flex p-3 bg-gray-800">
+                            <FontAwesomeIcon icon={faHome} className='my-auto'/>
+                            <span className='ml-6'>Dashboard</span>
+                        </li>
+                    </Link>
+                    <Link href="/dashboard" className=''>
+                        <li className="flex p-3 bg-gray-600 hover:bg-gray-800">
+                            <FontAwesomeIcon icon={faTable} className='my-auto'/>
+                            <span className='ml-6'>Data</span>
+                        </li>
+                    </Link>
+                </ul>
+            </div>
         </>
     );
 
