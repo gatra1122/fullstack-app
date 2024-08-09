@@ -14,34 +14,29 @@ function Login() {
     const { errors } = usePage().props;
 
     //define state
-    const [name, setName]   = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-    //method "storeRegister"
-    const storeRegister = async(e) => {
+    //method "storeLogin"
+    const storeLogin  = async(e) => {
         e.preventDefault();
         
         Inertia.post('/login', {
             //data
-            name: name,
             email: email,
             password: password,
-            password_confirmation: passwordConfirmation
         });
     } 
 
     return (
         <>
-            {/* <Layout> Untuk tampilan partial </Layout> */}
             <Head>
                 <title>Masuk | Nama Aplikasi</title>
             </Head>
 
             <div>
                 <div className="grid lg:grid-cols-2 md:grid-cols-2 items-center gap-4">
-                    <div className="max-md:order-1 h-screen min-h-full">
+                    <div className="pointer-events-none max-md:order-1 h-screen min-h-full">
                         <img
                             src="/assets/img/image-3.webp"
                             className="w-full h-full object-cover"
@@ -49,21 +44,15 @@ function Login() {
                         />
                     </div>
 
-                    <form
-                        className="animate-fade-down animate-once animate-duration-200 max-w-xl w-full p-6 mx-auto"
-                        onSubmit={storeRegister}
-                    >
+                    <form className="animate-fade-down animate-once animate-duration-200 max-w-xl w-full p-6 mx-auto" onSubmit={storeLogin}>
                         <div className="mb-12">
-                            <h3 className="text-gray-800 text-4xl font-extrabold">
-                                Daftar
+                            <h3 className="cursor-default text-gray-800 text-4xl font-extrabold">
+                                Masuk
                             </h3>
                             <p className="text-gray-800 text-sm mt-6">
-                                Sudah punya akun ?
-                                <Link
-                                    href="/masuk"
-                                    className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
-                                >
-                                    Masuk disini
+                                Belum punya akun ?
+                                <Link href="/register" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
+                                    Daftar disini
                                 </Link>
                             </p>
                         </div>
@@ -77,21 +66,6 @@ function Login() {
                             </Alert>
                         )}
 
-                        <div className="mt-8">
-                            <TextField
-                                fullWidth
-                                name="name"
-                                type="text"
-                                variant="standard"
-                                label="Nama"
-                                placeholder="Masukkan nama anda"
-                                error={
-                                    errors != null && errors.name ? "error" : ""
-                                }
-                                required
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
                         <div className="mt-8">
                             <TextField
                                 fullWidth
@@ -126,29 +100,10 @@ function Login() {
                                 required
                             />
                         </div>
-                        <div className="mt-8">
-                            <TextField
-                                fullWidth
-                                name="password_confirmation"
-                                type="password"
-                                variant="standard"
-                                label="Konfirmasi Password"
-                                placeholder="Konfirmasi password"
-                                error={
-                                    errors != null && errors.password
-                                        ? "error"
-                                        : ""
-                                }
-                                required
-                                onChange={(e) =>
-                                    setPasswordConfirmation(e.target.value)
-                                }
-                            />
-                        </div>
 
                         <div className="mt-12 block">
                             <Button type="submit" variant="contained" fullWidth>
-                                Daftar
+                                Masuk
                             </Button>
                         </div>
                     </form>

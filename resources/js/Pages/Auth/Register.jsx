@@ -34,14 +34,13 @@ function Register() {
 
     return (
         <>
-            {/* <Layout> Untuk tampilan partial </Layout> */}
             <Head>
                 <title>Register Akun | Nama Aplikasi</title>
             </Head>
 
             <div>
                 <div className="grid lg:grid-cols-2 md:grid-cols-2 items-center gap-4">
-                    <div className="max-md:order-1 h-screen min-h-full">
+                    <div className="pointer-events-none max-md:order-1 h-screen min-h-full">
                         <img
                             src="/assets/img/image-3.webp"
                             className="w-full h-full object-cover"
@@ -54,13 +53,13 @@ function Register() {
                         onSubmit={storeRegister}
                     >
                         <div className="mb-12">
-                            <h3 className="text-gray-800 text-4xl font-extrabold">
+                            <h3 className="cursor-default text-gray-800 text-4xl font-extrabold">
                                 Daftar
                             </h3>
                             <p className="text-gray-800 text-sm mt-6">
                                 Sudah punya akun ?
                                 <Link
-                                    href="/masuk"
+                                    href="/login"
                                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
                                 >
                                     Masuk disini

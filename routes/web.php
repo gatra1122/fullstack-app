@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,19 @@ Route::get('/', function () {
     return inertia('Welcome');
 });
 
-//Login
-Route::get('/login', [LoginController::class, 'index']);
+
+Route::group(['middleware' => ['auth']], function () {
+//Dashboard
+Route::get('/dashboard', DashboardController::class)->middleware('auth');
+//Logout
+Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
+});
+
+Route::group(['middleware' => ['guest']], function () {
 //Register
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
+//Login
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'store']);
+});
