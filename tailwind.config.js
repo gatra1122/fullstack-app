@@ -6,7 +6,11 @@ module.exports = {
     './resources/views/**/*.php',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-yellow':'#BAA333',
+      }
+    },
   },
   plugins: [
     require('tailwindcss-animated'),

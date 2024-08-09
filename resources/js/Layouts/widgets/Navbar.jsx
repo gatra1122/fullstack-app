@@ -8,8 +8,7 @@ function Navbar() {
 
     return (
         <>
-            <div className='bg-blue-100 flex w-screen px-2'>
-            
+            <div className='flex w-full'>
                 <span>
                     INI NAVBAR <strong>{auth.user.name}</strong>
                 </span>

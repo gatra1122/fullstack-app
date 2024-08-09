@@ -1,31 +1,37 @@
 import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/inertia-react';
-// import Navbar from './widgets/Navbar';
 import {Navbar,Footer, Sidebar} from './widgets';
+import { ArrowRight, Dehaze, ArrowLeft } from '@mui/icons-material';
+import classNames from 'classnames';
 
 function Layout({ children }) {
 
     //destruct props "auth"
     const { auth } = usePage().props;
-    const [toggleSide, setToggleSide] = useState(true);
+    const [toggleSide, setToggleSide] = useState(false);
 
     function showSide(){
         setToggleSide(!toggleSide)
     }
-
     return (
         <>
-            <div className="flex">
-                <aside hidden={toggleSide ? 1 : 0}>
-                        <Sidebar></Sidebar>
+            <div className="flex h-screen overflow-hidden">
+                <aside className={(toggleSide ? 'w-0' : 'w-[18rem]') + " max-[640px]:w-0 flex-none overflow-hidden transition-all duration-100 ease-out"}>
+                    <Sidebar></Sidebar>
                 </aside>
-                <main className="flex flex-col h-screen w-full">
-                    <div className='flex'>
-                    <button type='button' className='bg-green-500 px-2' onClick={showSide}>Show/Hide</button>
-                    <Navbar></Navbar>
+                <main className="flex flex-col w-full">
+                    <div className="flex-none bg-[#ADBBDA]  h-16">
+                        <button
+                            type="button"
+                            onClick={showSide}
+                            className="px-2"
+                        >
+                            <Dehaze sx={{ fontSize: 40 }}></Dehaze>
+                        </button>
+                        <Navbar></Navbar>
                     </div>
-                    <div className="bg-yellow-100 h-full">{children}</div>
-                    <div className="">
+                    <div className="flex-grow bg-[#EDE8F5] p-5">{children}</div>
+                    <div className="flex-none">
                         <Footer></Footer>
                     </div>
                 </main>
