@@ -30,10 +30,6 @@ class LoginController extends Controller
         /**
          * validate request
          */
-        // $this->validate($request, [
-        //     'email'     => 'required|email',
-        //     'password'  => 'required'
-        // ]);
         $request->validated();
 
         //get email and password from request
@@ -64,7 +60,6 @@ class LoginController extends Controller
     public function destroy()
     {
         auth()->logout();
-
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

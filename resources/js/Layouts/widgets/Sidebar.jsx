@@ -4,22 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faTable } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
-
     return (
         <>
             <div className="bg-gray-700 h-screen w-full">
-                <div className="py-5 text-center">APLIKASI</div>
-                <ul className="bg-gray-600">
-                    <Link href="/dashboard">
-                        <li className="flex p-3 bg-gray-800">
+                <div className="py-5 text-center font-bold cursor-default">APLIKASI</div>
+                <ul>
+                    <Link href={route('dashboard')}>
+                        <li className={"flex px-6 py-3 " + (route().current('dashboard') ? 'bg-gray-800':'hover:bg-gray-600')}>
                             <FontAwesomeIcon icon={faHome} className='my-auto'/>
                             <span className='ml-6'>Dashboard</span>
                         </li>
                     </Link>
-                    <Link href="/dashboard" className=''>
-                        <li className="flex p-3 bg-gray-600 hover:bg-gray-800">
+                    <Link href={route('dataorang.index')} className=''>
+                        <li className={"flex px-6 py-3 " + (route().current('dataorang.index') ? 'bg-gray-800':'hover:bg-gray-600')}>
                             <FontAwesomeIcon icon={faTable} className='my-auto'/>
-                            <span className='ml-6'>Data</span>
+                            <span className='ml-6'>Data Orang</span>
                         </li>
                     </Link>
                 </ul>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataOrangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +24,20 @@ use App\Http\Controllers\DashboardController;
 
 Route::group(['middleware' => ['auth']], function () {
 //Dashboard
-Route::get('/dashboard', DashboardController::class)->middleware('auth');
+Route::get('/dashboard', DashboardController::class)->name('dashboard');
+//Data Orang
+Route::get('/data-orang', [DataOrangController::class, 'index'])->name('dataorang.index');
+
 //Logout
-Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
+Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
 
 Route::group(['middleware' => ['guest']], function () {
 //Login
 Route::get('/', [LoginController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
-Route::post('/login', [LoginController::class, 'store']);
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 //Register
-Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 });
