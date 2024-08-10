@@ -20,7 +20,7 @@ function Layout({ children }) {
                 <aside
                     className={
                         (toggleSide ? "w-0" : "w-[18rem]") +
-                        " h-screen overflow-hidden max-[640px]:w-0 transition-all duration-200 ease-in-out text-gray-300"
+                        " h-screen overflow-hidden max-[640px]:w-0 transition-width duration-200 ease-in-out text-gray-300"
                     }
                 >
                     <Sidebar></Sidebar>

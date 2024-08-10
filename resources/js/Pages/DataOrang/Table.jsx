@@ -48,6 +48,7 @@ export default function Table() {
     ];
 
     const table = useReactTable({
+        width: "auto",
         columns,
         data: getData,
         debugTable: true,
@@ -75,7 +76,7 @@ export default function Table() {
 
     return (
         <>
-            <table className="w-full min-w-max table-auto text-left">
+            <table className="w-full table-auto text-left">
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => {
                         return (

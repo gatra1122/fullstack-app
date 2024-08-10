@@ -6,7 +6,12 @@ module.exports = {
     './resources/views/**/*.php',
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'height': 'height',
+        'width': 'width',
+      }
+    },
   },
   plugins: [
     require('tailwindcss-animated'),
