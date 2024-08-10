@@ -9,11 +9,9 @@ function Dashboard() {
 
     return (
         <>
-            <Head>
-                <title>Dashboard</title>
-            </Head>
+            <Head title="Dashboard"/>
             <Layout>
-                <div>
+                <div title="Data Orang">
                     Selamat Datang <strong>{auth.user.name}</strong>
                     <br />
                     Ini bagian konten

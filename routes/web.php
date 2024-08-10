@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
 //Data Orang
 Route::get('/data-orang', [DataOrangController::class, 'index'])->name('dataorang.index');
+Route::get('/data-orang/show', [DataOrangController::class, 'show'])->name('dataorang.show');
 
 //Logout
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');

@@ -21,8 +21,7 @@ function Login() {
     const storeLogin  = async(e) => {
         e.preventDefault();
 
-        console.log('LOADING: TRUE');
-        Inertia.post('/login', {
+        Inertia.post(route('login.store'), {
             //data
             email: email,
             password: password,

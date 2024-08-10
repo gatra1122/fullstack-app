@@ -13,6 +13,7 @@ function Layout({ children }) {
     function showSide(){
         setToggleSide(!toggleSide)
     }
+
     return (
         <>
             <div className="flex h-screen overflow-hidden">
@@ -33,7 +34,7 @@ function Layout({ children }) {
                         >
                             <FontAwesomeIcon icon={faBars}/>
                         </button>
-                        <Navbar></Navbar>
+                        <Navbar judulPage={children.props.title}></Navbar>
                     </div>
                     <div className="flex-grow p-5">{children}</div>
                     <div className="flex-none py-2 border-solid border-t border-gray-300">
