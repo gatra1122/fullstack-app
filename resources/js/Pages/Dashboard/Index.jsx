@@ -11,7 +11,7 @@ function Dashboard() {
         <>
             <Head title="Dashboard"/>
             <Layout>
-                <div title="Data Orang">
+                <div judulPage="Dashboard">
                     Selamat Datang <strong>{auth.user.name}</strong>
                     <br />
                     Ini bagian konten

@@ -15,13 +15,13 @@ class DataOrangResource extends JsonResource
     public function toArray($request)
     {
         return [
-            '0' => $this->id,
-            '1' => $this->name,
-            '2' => $this->age,
-            '3' => $this->job,
-            '4' => $this->gender,
-            '5' => $this->address,
-            '6' => $this->created_at,
+           'id' => $this->id,
+            'name' => $this->name,
+            'age' => $this->age,
+            'job' => $this->job,
+            'gender' => $this->gender,
+            'address' => $this->address,
+            'created_at' => $this->created_at,
         ];
     }
 }

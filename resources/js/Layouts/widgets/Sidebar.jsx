@@ -6,7 +6,7 @@ import { faHome, faTable } from '@fortawesome/free-solid-svg-icons';
 function Sidebar() {
     return (
         <>
-            <div className="bg-gray-700 h-screen w-full">
+            <div className="bg-gray-700 h-full w-full">
                 <div className="py-5 text-center font-bold cursor-default">APLIKASI</div>
                 <ul>
                     <Link href={route('dashboard')}>
