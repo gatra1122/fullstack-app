@@ -20,7 +20,7 @@ export default function ProfileMenu(){
                 <Menu>
                     <MenuHandler>
                         <div className='bg-blue-50 flex flex-row  pr-2 rounded-full cursor-default hover:bg-blue-100 active:hover:bg-blue-200 transition-colors'>
-                            <Avatar src="assets/img/person-icon.png" alt="avatar" variant="rounded" size="sm"/>
+                            <Avatar src="/assets/img/person-icon.png" alt="avatar" variant="rounded" size="sm"/>
                             <span className='ml-1 my-auto'>Halo, <b>{auth.user.name}</b></span>
                         </div>
                     </MenuHandler>

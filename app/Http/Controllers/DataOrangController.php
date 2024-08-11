@@ -17,11 +17,13 @@ class DataOrangController extends Controller
     }
 
     public function show(){
-        // return Inertia('DataOrang/Index', [
-        //     'dataorang' => DataOrang::all()
-        // ]);
         return DataOrangResource::collection(DataOrang::query()->orderBy('id', 'desc')->get());
-        //return DataOrang::all();
+    }
+
+    public function form(){
+        return Inertia('DataOrang/Form', [
+            'currentpage' => 'Data Orang / Form'
+        ]);
     }
 
     // public function show(Event $event){
