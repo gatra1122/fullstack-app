@@ -13,6 +13,7 @@ import {
 
 export default function ProfileMenu(){
     const {auth} = usePage().props;
+    const {auth} = usePage().props;
 
     return (
         <>

@@ -5,6 +5,7 @@ import { faHome, faTable } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
 
+
     return (
         <>
             <div className="bg-light-blue-700 h-full w-full">
