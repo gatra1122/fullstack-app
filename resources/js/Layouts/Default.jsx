@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/inertia-react';
 import {Navbar,Footer, Sidebar} from './widgets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 function Layout({ children }) {
-
-    //destruct props "auth"
-    const { auth } = usePage().props;
+    const {currentpage} = usePage().props;
     const [toggleSide, setToggleSide] = useState(false);
 
     function showSide(){
@@ -16,18 +14,19 @@ function Layout({ children }) {
 
     return (
         <>
-            <div className="flex">
+            <div className="flex text-blue-gray-900">
                 <aside
                     className={
                         (toggleSide ? "w-0" : "w-[18rem]") +
-                        " h-screen overflow-hidden max-[640px]:w-0 transition-width duration-200 ease-in-out text-gray-300"
+                        " h-screen overflow-hidden max-[640px]:w-0 transition-width duration-200 ease-in-out text-blue-gray-50"
                     }
                 >
-                    <Sidebar></Sidebar>
+                    <Sidebar />
                 </aside>
                 <main className="flex flex-col w-full h-screen overflow-y-scroll">
                     {/* Navbar */}
-                    <div className="flex h-16 border-solid border-b border-gray-300">
+                    <div className="flex-none h-16 border-solid border-b border-blue-gray-100">
+                        <div className='flex flex-row mt-[14px]'>
                             <button
                                 type="button"
                                 onClick={showSide}
@@ -35,15 +34,14 @@ function Layout({ children }) {
                             >
                                 <FontAwesomeIcon icon={faBars} />
                             </button>
-                            <Navbar
-                                judulPage={children.props.judulPage}
-                            ></Navbar>
+                            <Navbar currentpage={currentpage} />
                         </div>
+                    </div>
                     {/* Konten */}
                     <div className="grow p-5">{children}</div>
                     {/* Footer */}
-                    <div className="py-2 border-solid border-t border-gray-300">
-                        <Footer></Footer>
+                    <div className="py-2 border-solid border-t border-blue-gray-100">
+                        <Footer />
                     </div>
                 </main>
             </div>

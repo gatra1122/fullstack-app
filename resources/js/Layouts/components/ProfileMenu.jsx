@@ -1,58 +1,49 @@
 import React from 'react';
-import { MenuItem,Menu,IconButton, ListItemIcon, Divider,MenuList } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { Link } from '@inertiajs/react';
-import { Route } from '@mui/icons-material';
+import { faRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
+import { usePage, Link } from '@inertiajs/inertia-react';
+import {
+    Menu,
+    MenuHandler,
+    MenuList,
+    MenuItem,
+    Typography,
+    Avatar
+  } from "@material-tailwind/react";
 
 export default function ProfileMenu(){
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-
-    function tomboltest(){
-        //route('login.index');
-    }
+    const {auth} = usePage().props;
 
     return (
         <>
             <div>
-                <IconButton
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}
-                >
-                    <FontAwesomeIcon icon={faUserCircle} />
-                </IconButton>
-                <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                    }}
-                >
-                    <MenuList sx={{ width: 150, maxWidth: "100%" }}>
-                        <Link href='/#'>
-                            <MenuItem onClick={tomboltest}>Profil</MenuItem>
-                        </Link>
-                        <Divider sx={{ my: 0.5 }} />
-                        <Link href={route('logout')}>
-                            <MenuItem onClick={handleClose}>
-                                <ListItemIcon>
-                                    <FontAwesomeIcon
-                                        icon={faRightFromBracket}
-                                    />
-                                </ListItemIcon>
-                                Keluar
+                <Menu>
+                    <MenuHandler>
+                        <div className='bg-blue-50 flex flex-row  pr-2 rounded-full cursor-default hover:bg-blue-100 active:hover:bg-blue-200 transition-colors'>
+                            <Avatar src="assets/img/person-icon.png" alt="avatar" variant="rounded" size="sm"/>
+                            <span className='ml-1 my-auto'>Halo, <b>{auth.user.name}</b></span>
+                        </div>
+                    </MenuHandler>
+                    <MenuList>
+                        <Typography variant="small" className="font-medium">
+                                {auth.user.email}
+                            </Typography>
+                    <hr className="my-2 border-blue-gray-50" />
+                        <MenuItem className="flex items-center gap-2">
+                            <FontAwesomeIcon icon={faGear} />
+                            <Typography variant="small" className="font-medium">
+                                Profil
+                            </Typography>
+                        </MenuItem>
+                        <Link href={route("logout")}>
+                            <MenuItem className="flex items-center gap-2 ">
+                                <FontAwesomeIcon icon={faRightFromBracket} />
+                                <Typography
+                                    variant="small"
+                                    className="font-medium"
+                                >
+                                    Keluar
+                                </Typography>
                             </MenuItem>
                         </Link>
                     </MenuList>

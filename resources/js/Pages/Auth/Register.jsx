@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 //import Layout from '../../Layouts/Default';
 import { Head, usePage, Link } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
-
-// UI
-import { Button, TextField } from '@mui/material';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+import { Button, Input,Typography } from '@material-tailwind/react';
 
 function Register() {
 
@@ -68,69 +64,67 @@ function Register() {
                         </div>
 
                         {Object.keys(errors).length > 0 && (
-                            <Alert severity="error">
-                                <AlertTitle>Gagal</AlertTitle>
-                                {Object.keys(errors).map((key) => (
-                                    <p key={key}>*{errors[key]}</p>
-                                ))}
-                            </Alert>
+                            <div className="bg-red-400 py-4 px-6 border-1 border-red-900 rounded-lg text-blue-gray-50">
+                                <Typography className="font-medium">
+                                    Gagal !
+                                </Typography>
+                                <ul>
+                                    {Object.keys(errors).map((key) => (
+                                        <li key={key}>*{errors[key]}</li>
+                                    ))}
+                                </ul>
+                            </div>
                         )}
 
                         <div className="mt-8">
-                            <TextField
-                                fullWidth
+                            <Input
                                 name="name"
                                 type="text"
-                                variant="standard"
                                 label="Nama"
                                 placeholder="Masukkan nama anda"
-                                error={ errors.name ? 1 : 0 }
+                                error={errors.name ? 1 : 0}
                                 required
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </div>
                         <div className="mt-8">
-                            <TextField
-                                fullWidth
+                            <Input
                                 name="email"
                                 type="email"
-                                variant="standard"
                                 label="Email"
                                 placeholder="Masukkan alamat email"
-                                error={ errors.email? 1 : 0 }
+                                error={errors.email ? 1 : 0}
                                 required
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="mt-8">
-                            <TextField
-                                fullWidth
+                            <Input
                                 name="password"
                                 type="password"
                                 onChange={(e) => setPassword(e.target.value)}
-                                variant="standard"
                                 label="Password"
                                 placeholder="Masukkan password"
-                                error={ errors.password ? 1 : 0 }
+                                error={errors.password ? 1 : 0}
                                 required
                             />
                         </div>
                         <div className="mt-8">
-                            <TextField
-                                fullWidth
+                            <Input
                                 name="password_confirmation"
                                 type="password"
-                                variant="standard"
                                 label="Konfirmasi Password"
                                 placeholder="Konfirmasi password"
-                                error={ errors.password ? 1 : 0 }
+                                error={errors.password ? 1 : 0}
                                 required
-                                onChange={(e) => setPasswordConfirmation(e.target.value) }
+                                onChange={(e) =>
+                                    setPasswordConfirmation(e.target.value)
+                                }
                             />
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" variant="contained" fullWidth>
+                            <Button type="submit" fullWidth>
                                 Daftar
                             </Button>
                         </div>

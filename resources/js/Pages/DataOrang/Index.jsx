@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Layout from '../../Layouts/Default';
-import { Head, usePage } from '@inertiajs/inertia-react';
-// import { Table as Tbl } from './Table';
-import { Inertia } from '@inertiajs/inertia';
-import axios from 'axios';
+import { Head } from '@inertiajs/inertia-react';
 import Table from './Table';
 
 function DataOrang() {
     return (
         <>
-            <Head title="Data Orang">
-            </Head>
+            <Head title="Data Orang"/>
             <Layout>
-                <div judulPage="Data Orang">
-                    <div>
-                    <br />
-                    Ini bagian konten data orang
-                    <div>
-                        <Table></Table>
-                    </div>
-                    </div>
-
-                </div>
+                <Table />
             </Layout>
         </>
     );

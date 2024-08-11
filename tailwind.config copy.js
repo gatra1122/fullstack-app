@@ -1,5 +1,6 @@
-const withMT = require("@material-tailwind/react/utils/withMT");
- module.exports = withMT({
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     './resources/js/**/*.jsx',
     './resources/views/**/*.php',
@@ -15,5 +16,5 @@ const withMT = require("@material-tailwind/react/utils/withMT");
   plugins: [
     require('tailwindcss-animated'),
   ],
-});
+}
 
