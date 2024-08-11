@@ -9,7 +9,7 @@
         @inertiaHead
         <link rel="icon" type="image/x-icon" href="/assets/img/vite.svg">
     </head>
-    <body style="background-color:#f3f4f6;color:#475569">
+    <body>
         @inertia
     </body>
 </html>

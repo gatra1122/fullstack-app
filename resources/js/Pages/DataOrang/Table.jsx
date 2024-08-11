@@ -9,6 +9,7 @@ import {
     getFilteredRowModel,
     getPaginationRowModel
 } from "@tanstack/react-table";
+import { Spinner } from '@material-tailwind/react';
 
 export default function Table() {
     const [isLoading, setIsLoading] = useState();
@@ -78,12 +79,13 @@ export default function Table() {
         <>
             <table className="w-full table-auto text-left">
                 <thead>
-                    {table.getHeaderGroups().map((headerGroup) => {
+                    {table.getHeaderGroups().map((headerGroup, id) => {
                         return (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
+                            <tr key={id}>
+                                {headerGroup.headers.map((header, id) => {
                                     return (
                                         <th
+                                            key={id}
                                             id={header.id}
                                             className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                                         >
@@ -102,6 +104,15 @@ export default function Table() {
                         );
                     })}
                 </thead>
+                {isLoading && (
+                    <tbody>
+                        <tr>
+                            <td colSpan={8} className=''>
+                                <Spinner className='h-10 w-10 mx-auto mt-3' />
+                            </td>
+                        </tr>
+                    </tbody>
+                )}
                 <tbody>
                     {table.getRowModel().rows.map((row) => {
                         return (

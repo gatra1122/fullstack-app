@@ -14,6 +14,8 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return inertia('Dashboard/Index');
+        return inertia('Dashboard/Index', [ 
+            "currentpage" => "Dashboard"
+        ]);
     }
 }

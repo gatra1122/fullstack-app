@@ -11,10 +11,9 @@ class DataOrangController extends Controller
 {
     public function index()
     {
-        return inertia('DataOrang/Index');
-        // return Inertia('DataOrang/Index', [
-        //     'dataorang' => DataOrang::all()
-        // ]);
+        return Inertia('DataOrang/Index', [
+            'currentpage' => 'Data Orang'
+        ]);
     }
 
     public function show(){

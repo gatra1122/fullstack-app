@@ -3,7 +3,6 @@ import Layout from '../../Layouts/Default';
 import { Head, usePage } from '@inertiajs/inertia-react';
 
 function Dashboard() {
-
     //destruct props "auth"
     const { auth } = usePage().props;
 
@@ -11,7 +10,7 @@ function Dashboard() {
         <>
             <Head title="Dashboard"/>
             <Layout>
-                <div judulPage="Dashboard">
+                <div>
                     Selamat Datang <strong>{auth.user.name}</strong>
                     <br />
                     Ini bagian konten
