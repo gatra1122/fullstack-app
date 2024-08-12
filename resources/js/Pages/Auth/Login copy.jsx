@@ -1,57 +1,46 @@
 import React, { useState } from 'react';
-import { Head, usePage, Link } from '@inertiajs/react';
+import { Head, usePage, Link, router, useForm } from '@inertiajs/react';
 import { Button, Input,Typography } from '@material-tailwind/react';
-import { router } from '@inertiajs/react';
+import { toast } from 'react-toastify';
 
-function Register() {
-    // const { errors } = usePage().props;
-    // const [name, setName]   = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [passwordConfirmation, setPasswordConfirmation] = useState('');
+function Login() {
+    const { errors } = usePage(null).props;
+    const [isLoading,setIsLoading] = useState(false);
 
-    // const storeRegister = async(e) => {
-    //     e.preventDefault();
-        
-    //     router.post('/register', {
-    //         //data
-    //         name: name,
-    //         email: email,
-    //         password: password,
-    //         password_confirmation: passwordConfirmation
-    //     });
-    // } 
+    //define state
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const { data, setData, post, processing, errors } = useForm({
-        email: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
-      })
+    const notify = () => toast("Wow so easy !");
 
-    const storeRegister  = async(e) => {
+    //method "storeLogin"
+    const storeLogin  = async(e) => {
         e.preventDefault();
-          post(route('login.store'), {
-            _method: "post",
-            data,
+        setIsLoading(true)
+        router.post(route('login.store'), {
+            onStart: (visit) => {console.log('on start')},
             onSuccess: () => {
-                toast.success('Berhasil !');
+                setIsLoading(false)
+                console.log('LOGGED IN')
             },
             onError: () => {
-                toast.error('Gagal !');
+                setIsLoading(false)
+                console.log("GAGAL");
             },
+            email: email,
+            password: password,
         });
     } 
 
     return (
         <>
             <Head>
-                <title>Register Akun | Nama Aplikasi</title>
+                <title>Masuk | Nama Aplikasi</title>
             </Head>
 
             <div>
                 <div className="grid lg:grid-cols-2 md:grid-cols-2 items-center gap-4">
-                    <div className="pointer-events-none max-md:order-1 h-screen min-h-full">
+                    <div className="pointer-events-none max-md:order-1 h-screen">
                         <img
                             src="/assets/img/image-3.webp"
                             className="w-full h-full object-cover"
@@ -61,19 +50,19 @@ function Register() {
 
                     <form
                         className="animate-fade-down animate-once animate-duration-200 max-w-xl w-full p-6 mx-auto"
-                        onSubmit={storeRegister}
+                        onSubmit={storeLogin}
                     >
                         <div className="mb-12">
                             <h3 className="cursor-default text-gray-800 text-4xl font-extrabold">
-                                Daftar
+                                Masuk
                             </h3>
                             <p className="text-gray-800 text-sm mt-6">
-                                Sudah punya akun ?
+                                Belum punya akun ?
                                 <Link
-                                    href="/login"
+                                    href="/register"
                                     className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
                                 >
-                                    Masuk disini
+                                    Daftar disini
                                 </Link>
                             </p>
                         </div>
@@ -93,24 +82,13 @@ function Register() {
 
                         <div className="mt-8">
                             <Input
-                                name="name"
-                                type="text"
-                                label="Nama"
-                                placeholder="Masukkan nama anda"
-                                error={errors.name ? 1 : 0}
-                                required
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="mt-8">
-                            <Input
                                 name="email"
                                 type="email"
                                 label="Email"
                                 placeholder="Masukkan alamat email"
+                                onChange={(e) => setEmail(e.target.value)}
                                 error={errors.email ? 1 : 0}
                                 required
-                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="mt-8">
@@ -124,23 +102,10 @@ function Register() {
                                 required
                             />
                         </div>
-                        <div className="mt-8">
-                            <Input
-                                name="password_confirmation"
-                                type="password"
-                                label="Konfirmasi Password"
-                                placeholder="Konfirmasi password"
-                                error={errors.password ? 1 : 0}
-                                required
-                                onChange={(e) =>
-                                    setPasswordConfirmation(e.target.value)
-                                }
-                            />
-                        </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" className="bg-light-blue-600 animate-duration-1000" fullWidth>
-                                Daftar
+                            <Button type="submit" loading={isLoading} className="bg-light-blue-600 animate-duration-1000" fullWidth>
+                                Masuk
                             </Button>
                         </div>
                     </form>
@@ -151,4 +116,4 @@ function Register() {
 
 }
 
-export default Register
+export default Login

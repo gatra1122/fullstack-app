@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
-import { Head, usePage, Link } from '@inertiajs/react';
-import { router } from '@inertiajs/react';
+import { Head, usePage, Link, router, useForm } from '@inertiajs/react';
 import { Button, Input,Typography } from '@material-tailwind/react';
+import { toast } from 'react-toastify';
 
 function Login() {
+    const { data, setData, post, processing, errors } = useForm({
+        email: '',
+        password: '',
+      })
 
-    //destruct props "errors"
-    const { errors } = usePage(null).props;
-    const [isLoading,setIsLoading] = useState(false);
-
-    //define state
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    //method "storeLogin"
     const storeLogin  = async(e) => {
         e.preventDefault();
-        setIsLoading(true)
-        router.post(route('login.store'), {
-            //data
-            email: email,
-            password: password,
+          post(route('login.store'), {
+            _method: "post",
+            data,
             onSuccess: () => {
-                setIsLoading(false)
+                toast.success('Berhasil !');
             },
-            onError: () => {setIsLoading(false)},
+            onError: () => {
+                toast.error('Gagal !');
+            },
         });
     } 
 
@@ -82,7 +77,10 @@ function Login() {
                                 type="email"
                                 label="Email"
                                 placeholder="Masukkan alamat email"
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={data.email}
+                                    onChange={(e) =>
+                                        setData("email", e.target.value)
+                                    }
                                 error={errors.email ? 1 : 0}
                                 required
                             />
@@ -91,7 +89,10 @@ function Login() {
                             <Input
                                 name="password"
                                 type="password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={data.password}
+                                    onChange={(e) =>
+                                        setData("password", e.target.value)
+                                    }
                                 label="Password"
                                 placeholder="Masukkan password"
                                 error={errors.password ? 1 : 0}
@@ -100,7 +101,7 @@ function Login() {
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" loading={isLoading} className="bg-light-blue-600 animate-duration-1000" fullWidth>
+                            <Button type="submit" loading={processing} className="bg-light-blue-600 animate-duration-1000" fullWidth>
                                 Masuk
                             </Button>
                         </div>
