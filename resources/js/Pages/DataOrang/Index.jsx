@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../../Layouts/Default';
-// import { Head,Link } from '@inertiajs/inertia-react';
 import { Head,Link, usePage } from '@inertiajs/react';
 import Table from './Table';
 import { Breadcrumbs } from '@material-tailwind/react';

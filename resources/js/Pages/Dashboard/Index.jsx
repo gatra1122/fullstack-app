@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../../Layouts/Default';
-// import { Head, usePage } from '@inertiajs/inertia-react';
 import { Head, usePage } from '@inertiajs/react';
 import { Breadcrumbs, Card, CardFooter, CardHeader, CardBody, Typography, Button } from '@material-tailwind/react';
 

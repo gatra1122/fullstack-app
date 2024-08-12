@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-//import Layout from '../../Layouts/Default';
-// import { Head, usePage, Link } from '@inertiajs/inertia-react';
 import { Head, usePage, Link } from '@inertiajs/react';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import { Button, Input,Typography } from '@material-tailwind/react';
 
 function Login() {
@@ -19,7 +17,7 @@ function Login() {
     const storeLogin  = async(e) => {
         e.preventDefault();
         setIsLoading(true)
-        Inertia.post(route('login.store'), {
+        router.post(route('login.store'), {
             //data
             email: email,
             password: password,

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-// import { Inertia } from '@inertiajs/inertia';
 import Layout from '../../Layouts/Default';
 import { Head, usePage, useForm } from '@inertiajs/react';
 import {

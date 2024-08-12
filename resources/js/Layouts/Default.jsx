@@ -1,5 +1,4 @@
 import React, { useState,useContext,useEffect } from 'react';
-//import { Link, usePage } from '@inertiajs/inertia-react';
 import { Link, usePage } from '@inertiajs/react';
 import {Navbar,Footer, Sidebar} from './widgets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

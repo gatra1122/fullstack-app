@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-//import Layout from '../../Layouts/Default';
-// import { Head, usePage, Link } from '@inertiajs/inertia-react';
 import { Head, usePage, Link } from '@inertiajs/react';
-import { Inertia } from '@inertiajs/inertia';
 import { Button, Input,Typography } from '@material-tailwind/react';
+import { router } from '@inertiajs/react';
 
 function Register() {
 
@@ -20,7 +18,7 @@ function Register() {
     const storeRegister = async(e) => {
         e.preventDefault();
         
-        Inertia.post('/register', {
+        router.post('/register', {
             //data
             name: name,
             email: email,
