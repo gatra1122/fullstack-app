@@ -1,5 +1,6 @@
 import React, { useState,useContext } from 'react';
-import { Link } from '@inertiajs/inertia-react';
+// import { Link } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faTable } from '@fortawesome/free-solid-svg-icons';
 

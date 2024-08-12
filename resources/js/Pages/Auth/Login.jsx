@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 //import Layout from '../../Layouts/Default';
-import { Head, usePage, Link } from '@inertiajs/inertia-react';
+// import { Head, usePage, Link } from '@inertiajs/inertia-react';
+import { Head, usePage, Link } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
 import { Button, Input,Typography } from '@material-tailwind/react';
 

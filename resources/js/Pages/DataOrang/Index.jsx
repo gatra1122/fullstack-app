@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../../Layouts/Default';
-import { Head,Link } from '@inertiajs/inertia-react';
+// import { Head,Link } from '@inertiajs/inertia-react';
+import { Head,Link } from '@inertiajs/react';
 import Table from './Table';
 import { Button } from '@material-tailwind/react';
 

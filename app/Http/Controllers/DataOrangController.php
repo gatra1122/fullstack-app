@@ -31,7 +31,7 @@ class DataOrangController extends Controller
     {
         $data = $request->validated();
 
-        DataOrang::create([
+        $berhasil = DataOrang::create([
             'name' => $data['name'],
             'age' => $data['age'],
             'job' => $data['job'],
@@ -39,6 +39,11 @@ class DataOrangController extends Controller
             'address' => $data['address'],
         ]);
 
-        return redirect()->route('dataorang.index')->with('status', 'Register Berhasil!');
+        if($berhasil){
+            return redirect()->route('dataorang.index')->with('status', 'Register Berhasil!');
+        }
+        return back()->withErrors([
+            'password' => 'Password yang anda masukkan salah.',
+        ]);
     }
 }

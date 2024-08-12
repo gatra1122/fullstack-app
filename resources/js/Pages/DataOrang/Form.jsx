@@ -2,22 +2,19 @@ import React, {useState} from 'react'
 import axios from 'axios';
 import { Inertia } from '@inertiajs/inertia';
 import Layout from '../../Layouts/Default';
-import { Head, usePage, Link } from '@inertiajs/inertia-react';
+// import { Head, usePage, Link } from '@inertiajs/inertia-react';
+import { Head, usePage, useForm } from '@inertiajs/react';
 import {
     Input,
     Button,
     Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
     Typography,
     Select,
     Option,
 } from "@material-tailwind/react";
 
 export default function Form() {
-    //destruct props "errors"
-    const { errors } = usePage(null).props;
+    // const { errors } = usePage(null).props;
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -26,6 +23,12 @@ export default function Form() {
     const [address, setAddress] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     // const [ errors, setErrors]  =  useState([]);
+
+    const { data, setData, post, processing, errors } = useForm({
+        email: '',
+        password: '',
+        remember: false,
+      })
 
     const storeForm  = async(e) => {
         e.preventDefault();
@@ -53,8 +56,8 @@ export default function Form() {
             job: job,
             gender: gender,
             address: address,
-            onFinish: visit => {
-                console.log('vasfasd'+visit)
+            onError: (errors) => {
+                console.log('onError: '+errors)
               },
         });
     } 

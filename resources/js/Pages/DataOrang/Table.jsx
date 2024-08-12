@@ -12,7 +12,8 @@ import {
 import { Button, Spinner } from '@material-tailwind/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
-import { Link } from '@inertiajs/inertia-react';
+// import { Link } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 
 export default function Table() {
     const [isLoading, setIsLoading] = useState();

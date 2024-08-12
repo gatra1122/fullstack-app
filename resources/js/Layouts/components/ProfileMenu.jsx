@@ -1,7 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
-import { usePage, Link } from '@inertiajs/inertia-react';
+// import { usePage, Link } from '@inertiajs/inertia-react';
+import { usePage, Link } from '@inertiajs/react';
 import {
     Menu,
     MenuHandler,
