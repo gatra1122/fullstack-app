@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Head, usePage, Link, router, useForm } from '@inertiajs/react';
+import React from 'react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { Button, Input,Typography } from '@material-tailwind/react';
 import { toast } from 'react-toastify';
 
@@ -81,7 +81,8 @@ function Login() {
                                 onChange={(e) =>
                                     setData("email", e.target.value)
                                 }
-                                error={errors.email ? 1 : 0}
+                                error={errors.email ? true : false}
+                                variant="standard"
                                 required
                             />
                         </div>
@@ -95,7 +96,8 @@ function Login() {
                                 }
                                 label="Password"
                                 placeholder="Masukkan password"
-                                error={errors.password ? 1 : 0}
+                                error={errors.password ? true : false}
+                                variant="standard"
                                 required
                             />
                         </div>

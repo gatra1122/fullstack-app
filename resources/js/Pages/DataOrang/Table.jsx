@@ -7,13 +7,15 @@ import {
     useReactTable,
     getSortedRowModel,
     getFilteredRowModel,
-    getPaginationRowModel
+    getPaginationRowModel,
+    SortingFn,
+    SortingState,
 } from "@tanstack/react-table";
 import { Button, Spinner } from '@material-tailwind/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { Link } from '@inertiajs/react';
 import Delete from './Delete';
+import { faAnglesRight, faAngleRight, faAnglesLeft, faAngleLeft,faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default function Table() {
     const [isLoading, setIsLoading] = useState();
@@ -89,114 +91,46 @@ export default function Table() {
 
     return (
         <>
-                <div className='animate-fade animate-once animate-duration-300'>
-                <div className='float-left mb-2'>
-                    <Link href={route('dataorang.add')}><Button className='bg-light-blue-600'>Tambah</Button></Link>
-                </div>
-                    <table className="w-full table-auto text-left">
-                        <thead>
-                            {table.getHeaderGroups().map((headerGroup, id) => {
-                                return (
-                                    <tr key={id}>
-                                        {headerGroup.headers.map(
-                                            (header, id) => {
-                                                return (
-                                                    <th
-                                                        key={id}
-                                                        id={header.id}
-                                                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                                                    >
-                                                        {" "}
-                                                        {header.isPlaceholder
-                                                            ? null
-                                                            : flexRender(
-                                                                  header.column
-                                                                      .columnDef
-                                                                      .header,
-                                                                  header.getContext()
-                                                              )}
-                                                    </th>
-                                                );
-                                            }
-                                        )}
-                                    </tr>
-                                );
-                            })}
-                        </thead>
-                        {isLoading && (
-                            <tbody>
-                                <tr>
-                                    <td colSpan={8} className="">
-                                        <Spinner className="h-10 w-10 mx-auto mt-3 animate-duration-1000" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        )}
-                        <tbody>
-                            {table.getRowModel().rows.map((row) => {
-                                return (
-                                    <tr
-                                        key={row.id}
-                                        className="even:bg-blue-gray-50/50"
-                                    >
-                                        {row.getVisibleCells().map((cell) => {
-                                            return (
-                                                <td
-                                                    key={cell.id}
-                                                    className="p-4"
-                                                >
-                                                    {flexRender(
-                                                        cell.column.columnDef
-                                                            .cell,
-                                                        cell.getContext()
-                                                    )}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    {/* tombol paginasi */}
-                    <div className="flex items-center gap-2 mt-2">
+            <div className="animate-fade animate-once animate-duration-300">
+                <div className="flex flex-row mb-2">
+                <div className="grow flex gap-2 mt-2">
                         <Button
                             className="p-3 bg-light-blue-600"
                             onClick={() => table.firstPage()}
                             disabled={!table.getCanPreviousPage()}
                         >
-                            {"<<"}
+                            <FontAwesomeIcon icon={faAnglesLeft}/>
                         </Button>
                         <Button
                             className="p-3 bg-light-blue-600"
                             onClick={() => table.previousPage()}
                             disabled={!table.getCanPreviousPage()}
                         >
-                            {"<"}
+                            <FontAwesomeIcon icon={faAngleLeft}/>
                         </Button>
                         <Button
                             className="p-3 bg-light-blue-600"
                             onClick={() => table.nextPage()}
                             disabled={!table.getCanNextPage()}
                         >
-                            {">"}
+                            <FontAwesomeIcon icon={faAngleRight}/>
                         </Button>
                         <Button
                             className="p-3 bg-light-blue-600"
                             onClick={() => table.lastPage()}
                             disabled={!table.getCanNextPage()}
                         >
-                            {">>"}
+                            <FontAwesomeIcon icon={faAnglesRight}/>
                         </Button>
                         <span className="flex items-center gap-1">
-                            <div>Page</div>
+                            <div>Halaman</div>
                             <strong>
-                                {table.getState().pagination.pageIndex + 1} of{" "}
+                                {table.getState().pagination.pageIndex + 1} /{" "}
                                 {table.getPageCount().toLocaleString()}
                             </strong>
                         </span>
                         <span className="flex items-center gap-1">
-                            | Go to page:
+                            | Ke Halaman:
                             <input
                                 type="number"
                                 min="1"
@@ -221,12 +155,81 @@ export default function Table() {
                         >
                             {[10, 20, 30, 40, 50].map((pageSize) => (
                                 <option key={pageSize} value={pageSize}>
-                                    Show {pageSize}
+                                    Tampilkan: {pageSize}
                                 </option>
                             ))}
                         </select>
                     </div>
+                    <div className="mt-2">
+                        <Link href={route("dataorang.add")}>
+                            <Button className="bg-light-blue-600">
+                                Tambah
+                            </Button>
+                        </Link>
+                    </div>
+
+
                 </div>
+                <table className="w-full table-auto text-left">
+                    <thead>
+                        {table.getHeaderGroups().map((headerGroup, id) => {
+                            return (
+                                <tr key={id}>
+                                    {headerGroup.headers.map((header, id) => {
+                                        return (
+                                            <th
+                                                key={id}
+                                                id={header.id}
+                                                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                                            >
+                                                {" "}
+                                                {header.isPlaceholder
+                                                    ? null
+                                                    : flexRender(
+                                                          header.column
+                                                              .columnDef.header,
+                                                          header.getContext()
+                                                      )}
+                                            </th>
+                                        );
+                                    })}
+                                </tr>
+                            );
+                        })}
+                    </thead>
+                    {isLoading && (
+                        <tbody>
+                            <tr>
+                                <td colSpan={8} className="">
+                                    <Spinner className="h-10 w-10 mx-auto mt-3 animate-duration-1000" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    )}
+                    <tbody>
+                        {table.getRowModel().rows.map((row) => {
+                            return (
+                                <tr
+                                    key={row.id}
+                                    className="even:bg-blue-gray-50/50"
+                                >
+                                    {row.getVisibleCells().map((cell) => {
+                                        return (
+                                            <td key={cell.id} className="p-4">
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                {/* tombol paginasi */}
+            </div>
         </>
     );
 }

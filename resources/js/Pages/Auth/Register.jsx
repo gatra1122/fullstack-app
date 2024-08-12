@@ -81,7 +81,10 @@ function Register() {
                                 error={errors.name ? 1 : 0}
                                 required
                                 value={data.name}
-                                onChange={(e) => setData("name", e.target.value)}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                                variant="standard"
                             />
                         </div>
                         <div className="mt-8">
@@ -92,7 +95,10 @@ function Register() {
                                 error={errors.email ? 1 : 0}
                                 required
                                 value={data.email}
-                                onChange={(e) => setData("email", e.target.value)}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                                variant="standard"
                             />
                         </div>
                         <div className="mt-8">
@@ -106,6 +112,7 @@ function Register() {
                                 placeholder="Masukkan password"
                                 error={errors.password ? 1 : 0}
                                 required
+                                variant="standard"
                             />
                         </div>
                         <div className="mt-8">
@@ -117,13 +124,22 @@ function Register() {
                                 required
                                 value={data.password_confirmation}
                                 onChange={(e) =>
-                                    setData("password_confirmation", e.target.value)
+                                    setData(
+                                        "password_confirmation",
+                                        e.target.value
+                                    )
                                 }
+                                variant="standard"
                             />
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" loading={processing} className="bg-light-blue-600 animate-duration-1000" fullWidth>
+                            <Button
+                                type="submit"
+                                loading={processing}
+                                className="bg-light-blue-600 animate-duration-1000"
+                                fullWidth
+                            >
                                 Daftar
                             </Button>
                         </div>
