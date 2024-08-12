@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 
 class RegisterController extends Controller
@@ -26,35 +26,20 @@ class RegisterController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $data = $request->validate([
-                'name' => ['required', 'string', 'alpha:ascii'],
-                'email' => ['required', 'email', 'unique:users,email'],
-                'password' => [
-                    'required',
-                    'confirmed',
-                    Password::min(8)
-                    // ->letters()
-                    // ->symbols()
-                    // ->numbers()
-                ]
-        ],
-        [
-            'name.required' => 'Nama wajib diisi.',
-            'name.alpha' => 'Masukkan nama yang valid.',
-            'email.required' => 'Email wajib diisi.',
-            'email.unique' => 'Email sudah terdaftar.',
-            'password.required' => 'Masukkan password yang valid.',
-            'password.confirmed' => 'Password yang anda masukkan tidak sama.',
-            'password.min' => 'Password minimal 8 karakter.',
-        ]);
-
-        User::create([
+        $data = $request->validated();
+        $datastore = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        if(!$datastore){
+            return back()->withErrors([
+                'status' => 'Gagal!',
+            ]);
+        }
 
         return redirect()->route('login.index')->with('status', 'Register Berhasil!');
     }

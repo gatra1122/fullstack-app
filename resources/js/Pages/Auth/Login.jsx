@@ -26,7 +26,7 @@ function Login() {
     return (
         <>
             <Head>
-                <title>Masuk | Nama Aplikasi</title>
+                <title>Masuk</title>
             </Head>
 
             <div>
@@ -78,9 +78,9 @@ function Login() {
                                 label="Email"
                                 placeholder="Masukkan alamat email"
                                 value={data.email}
-                                    onChange={(e) =>
-                                        setData("email", e.target.value)
-                                    }
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
                                 error={errors.email ? 1 : 0}
                                 required
                             />
@@ -90,9 +90,9 @@ function Login() {
                                 name="password"
                                 type="password"
                                 value={data.password}
-                                    onChange={(e) =>
-                                        setData("password", e.target.value)
-                                    }
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
                                 label="Password"
                                 placeholder="Masukkan password"
                                 error={errors.password ? 1 : 0}
@@ -101,7 +101,12 @@ function Login() {
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" loading={processing} className="bg-light-blue-600 animate-duration-1000" fullWidth>
+                            <Button
+                                type="submit"
+                                loading={processing}
+                                className="bg-light-blue-600 animate-duration-1000"
+                                fullWidth
+                            >
                                 Masuk
                             </Button>
                         </div>

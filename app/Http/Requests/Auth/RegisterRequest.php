@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
@@ -12,7 +12,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'alpha:ascii'],
+            'name' => ['required', 'regex:/^[\pL\s]+$/u'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => [
                 'required',
@@ -40,7 +40,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required' => 'Nama wajib diisi !',
-            'name.alpha' => 'Masukkan nama yang valid !',
+            'name.regex' => 'Masukkan nama yang valid !',
             'email.required' => 'Email wajib diisi !',
             'email.unique' => 'Email sudah terdaftar !',
             'password.required' => 'Masukkan password yang valid !',

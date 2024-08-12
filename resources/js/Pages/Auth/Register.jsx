@@ -1,29 +1,11 @@
-import React, { useState } from 'react';
-import { Head, usePage, Link } from '@inertiajs/react';
+import React from 'react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { Button, Input,Typography } from '@material-tailwind/react';
-import { router } from '@inertiajs/react';
+import { toast } from 'react-toastify';
 
 function Register() {
-    // const { errors } = usePage().props;
-    // const [name, setName]   = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
-    // const storeRegister = async(e) => {
-    //     e.preventDefault();
-        
-    //     router.post('/register', {
-    //         //data
-    //         name: name,
-    //         email: email,
-    //         password: password,
-    //         password_confirmation: passwordConfirmation
-    //     });
-    // } 
-
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
+        name: '',
         email: '',
         password: '',
         password_confirmation: ''
@@ -31,11 +13,11 @@ function Register() {
 
     const storeRegister  = async(e) => {
         e.preventDefault();
-          post(route('login.store'), {
+          post(route('register.store'), {
             _method: "post",
             data,
             onSuccess: () => {
-                toast.success('Berhasil !');
+                toast.success('Berhasil ! Silahkan masuk');
             },
             onError: () => {
                 toast.error('Gagal !');
@@ -46,7 +28,7 @@ function Register() {
     return (
         <>
             <Head>
-                <title>Register Akun | Nama Aplikasi</title>
+                <title>Register Akun</title>
             </Head>
 
             <div>
@@ -93,31 +75,33 @@ function Register() {
 
                         <div className="mt-8">
                             <Input
-                                name="name"
                                 type="text"
                                 label="Nama"
                                 placeholder="Masukkan nama anda"
                                 error={errors.name ? 1 : 0}
                                 required
-                                onChange={(e) => setName(e.target.value)}
+                                value={data.name}
+                                onChange={(e) => setData("name", e.target.value)}
                             />
                         </div>
                         <div className="mt-8">
                             <Input
-                                name="email"
                                 type="email"
                                 label="Email"
                                 placeholder="Masukkan alamat email"
                                 error={errors.email ? 1 : 0}
                                 required
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={data.email}
+                                onChange={(e) => setData("email", e.target.value)}
                             />
                         </div>
                         <div className="mt-8">
                             <Input
-                                name="password"
                                 type="password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
                                 label="Password"
                                 placeholder="Masukkan password"
                                 error={errors.password ? 1 : 0}
@@ -126,20 +110,20 @@ function Register() {
                         </div>
                         <div className="mt-8">
                             <Input
-                                name="password_confirmation"
                                 type="password"
                                 label="Konfirmasi Password"
                                 placeholder="Konfirmasi password"
                                 error={errors.password ? 1 : 0}
                                 required
+                                value={data.password_confirmation}
                                 onChange={(e) =>
-                                    setPasswordConfirmation(e.target.value)
+                                    setData("password_confirmation", e.target.value)
                                 }
                             />
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" className="bg-light-blue-600 animate-duration-1000" fullWidth>
+                            <Button type="submit" loading={processing} className="bg-light-blue-600 animate-duration-1000" fullWidth>
                                 Daftar
                             </Button>
                         </div>
