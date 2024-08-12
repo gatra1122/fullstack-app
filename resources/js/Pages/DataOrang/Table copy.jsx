@@ -9,11 +9,12 @@ import {
     getFilteredRowModel,
     getPaginationRowModel
 } from "@tanstack/react-table";
-import { Button, Spinner } from '@material-tailwind/react';
+import { Button, Spinner, Dialog, DialogBody,DialogFooter,DialogHeader } from '@material-tailwind/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { Link } from '@inertiajs/react';
-import Delete from './Delete';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { router } from '@inertiajs/react'
 
 export default function Table() {
     const [isLoading, setIsLoading] = useState();
@@ -23,10 +24,6 @@ export default function Table() {
         pageIndex: 0,
         pageSize: 10,
     })
-
-    useEffect(() => {
-        datatable();
-      }, [])
    
       const columns = [
           columnHelper.accessor("no", {
@@ -53,12 +50,20 @@ export default function Table() {
           }),
           columnHelper.accessor("id", {
               header: "Aksi",
-              cell: (id) => <div className='flex flex-row gap-2'>
-              <Link href={route('dataorang.edit',id.getValue())}><FontAwesomeIcon className='text-2xl text-green-600 hover:animate-wiggle' icon={faEdit} /></Link>
-              <Delete id={id.getValue()} nama={id.cell.row.original.name}/>
-              </div>,
+              cell: (id) => <>
+              <Link href={route('dataorang.edit',id.getValue())}><FontAwesomeIcon icon={faEdit} /></Link>
+              <button type="button"onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deletePost(id.getValue()) } }><FontAwesomeIcon icon={faTrash} /></button>
+              {/* <button type="button" onClick={() => deletePost(id.getValue())}><FontAwesomeIcon icon={faTrash} /></button> */}
+              </>,
           }),
       ];
+
+      function deletePost(id) {
+        // router.delete(`/post/${id}`);
+        router.delete(route('dataorang.hapus', id));
+        datatable();
+        console.log(id)
+    }
 
     const table = useReactTable({
         width: "auto",
@@ -77,6 +82,10 @@ export default function Table() {
         // autoResetPageIndex: false, // turn off page index reset when sorting or filtering
       })
 
+      useEffect(() => {
+        datatable();
+      }, [])
+
       function datatable(){
         setIsLoading(true);
         axios.get(route("dataorang.show")).then((res) => {
@@ -87,12 +96,46 @@ export default function Table() {
         });
       }
 
+      const [size, setSize] = React.useState(null);
+ 
+      const handleOpen = (value) => setSize(value);
+
     return (
         <>
-                <div className='animate-fade animate-once animate-duration-300'>
-                <div className='float-left mb-2'>
-                    <Link href={route('dataorang.add')}><Button className='bg-light-blue-600'>Tambah</Button></Link>
-                </div>
+
+<div className="mb-3 flex gap-3">
+        <Button onClick={() => handleOpen("xs")} variant="gradient">
+          Open Dialog XS
+        </Button>
+      </div>
+      <Dialog
+        open={size === "xs"}
+        size={size || "md"}
+        handler={handleOpen}
+      >
+        <DialogHeader>Yakin hapus ?</DialogHeader>
+        <DialogBody>
+          Anda akan menghapus data......
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={() => handleOpen(null)}
+            className="mr-1"
+          >
+            <span>Cancel</span>
+          </Button>
+          <Button
+            variant="gradient"
+            color="red"
+            onClick={() => handleOpen(null)}
+          >
+            <span>Confirm</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
+                <div>
                     <table className="w-full table-auto text-left">
                         <thead>
                             {table.getHeaderGroups().map((headerGroup, id) => {
@@ -127,7 +170,7 @@ export default function Table() {
                             <tbody>
                                 <tr>
                                     <td colSpan={8} className="">
-                                        <Spinner className="h-10 w-10 mx-auto mt-3 animate-duration-1000" />
+                                        <Spinner className="h-10 w-10 mx-auto mt-3" />
                                     </td>
                                 </tr>
                             </tbody>

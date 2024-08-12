@@ -125,7 +125,7 @@ function Register() {
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" fullWidth>
+                            <Button type="submit" className="bg-light-blue-600 animate-duration-1000" fullWidth>
                                 Daftar
                             </Button>
                         </div>

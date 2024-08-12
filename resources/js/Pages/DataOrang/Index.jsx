@@ -1,19 +1,30 @@
 import React from 'react';
 import Layout from '../../Layouts/Default';
 // import { Head,Link } from '@inertiajs/inertia-react';
-import { Head,Link } from '@inertiajs/react';
+import { Head,Link, usePage } from '@inertiajs/react';
 import Table from './Table';
-import { Button } from '@material-tailwind/react';
+import { Breadcrumbs } from '@material-tailwind/react';
 
 function DataOrang() {
+    const test = usePage().props.currentpage;
+
     return (
         <>
-            <Head title="Data Orang"/>
+            <Head title="Data Orang" />
             <Layout>
-                <div className='float-right mb-2'>
-                    <Link href={route('dataorang.form')}><Button className='bg-light-blue-600'>Tambah</Button></Link>
+                <div className='flex flex-col'>
+                    <div className="ml-auto mb-10">
+                        <Breadcrumbs>
+                            <a href={route('dashboard')} className="opacity-60">
+                                Dashboard
+                            </a>
+                            <a href="#">
+                                Data Orang
+                            </a>
+                        </Breadcrumbs>
+                    </div>
+                    <Table />
                 </div>
-                <Table />
             </Layout>
         </>
     );

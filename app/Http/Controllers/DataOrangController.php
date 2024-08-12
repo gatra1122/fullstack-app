@@ -21,9 +21,20 @@ class DataOrangController extends Controller
         return DataOrangResource::collection(DataOrang::query()->orderBy('id', 'desc')->get());
     }
 
-    public function form(){
-        return Inertia('DataOrang/Form', [
-            'currentpage' => 'Data Orang / Form'
+    public function find($id){
+        return DataOrang::where('id',$id)->first();
+    }
+
+    public function add(){
+        return Inertia('DataOrang/Add', [
+            'currentpage' => 'Data Orang / Add'
+        ]);
+    }
+
+    public function edit($id){
+        return Inertia('DataOrang/Edit', [
+            'currentpage' => 'Data Orang / Edit',
+            'id_data' => $id,
         ]);
     }
 
@@ -31,7 +42,7 @@ class DataOrangController extends Controller
     {
         $data = $request->validated();
 
-        $berhasil = DataOrang::create([
+        $datastore = DataOrang::create([
             'name' => $data['name'],
             'age' => $data['age'],
             'job' => $data['job'],
@@ -39,11 +50,45 @@ class DataOrangController extends Controller
             'address' => $data['address'],
         ]);
 
-        if($berhasil){
-            return redirect()->route('dataorang.index')->with('status', 'Register Berhasil!');
+        if(!$datastore){
+            return back()->withErrors([
+                'status' => 'Gagal!',
+            ]);
         }
-        return back()->withErrors([
-            'password' => 'Password yang anda masukkan salah.',
+
+        return redirect()->route('dataorang.index')->with('status', 'Berhasil!');
+    }
+
+    public function update(StoreDataOrangRequest $request)
+    {
+        $data = $request->validated();
+        $dataupdate = DataOrang::findOrFail($request->id);
+        $dataupdate->update([
+            'name' => $data['name'],
+            'age' => $data['age'],
+            'job' => $data['job'],
+            'gender' => $data['gender'],
+            'address' => $data['address'],
         ]);
+
+        if(!$dataupdate){
+            return back()->withErrors([
+                'status' => 'Gagal!',
+            ]);
+        }
+
+        return redirect()->route('dataorang.index')->with('status', 'Berhasil!');
+    }
+
+    public function hapus($id)
+    {
+        $hapus = DataOrang::find($id)->delete();
+
+        if(!$hapus){
+            return back()->withErrors([
+                'status' => 'Gagal!',
+            ]);
+        }
+        return redirect()->route('dataorang.index')->with('status', 'Berhasil!');
     }
 }

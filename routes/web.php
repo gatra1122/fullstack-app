@@ -27,8 +27,12 @@ Route::get('/dashboard', DashboardController::class)->name('dashboard');
 //Data Orang
 Route::get('/data-orang', [DataOrangController::class, 'index'])->name('dataorang.index');
 Route::get('/data-orang/show', [DataOrangController::class, 'show'])->name('dataorang.show');
-Route::get('/data-orang/form', [DataOrangController::class, 'form'])->name('dataorang.form');
-Route::post('/data-orang/form/store', [DataOrangController::class, 'store'])->name('dataorang.store');
+Route::get('/data-orang/add', [DataOrangController::class, 'add'])->name('dataorang.add');
+Route::post('/data-orang/add/store', [DataOrangController::class, 'store'])->name('dataorang.store');
+Route::get('/data-orang/edit/{id}', [DataOrangController::class, 'edit'])->name('dataorang.edit');
+Route::get('/data-orang/find/{id}', [DataOrangController::class, 'find'])->name('dataorang.find');
+Route::post('/data-orang/edit/update', [DataOrangController::class, 'update'])->name('dataorang.update');
+Route::delete('/data-orang/hapus/{id}', [DataOrangController::class, 'hapus'])->name('dataorang.hapus');
 
 //Logout
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');

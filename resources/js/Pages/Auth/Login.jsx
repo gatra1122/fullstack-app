@@ -9,6 +9,7 @@ function Login() {
 
     //destruct props "errors"
     const { errors } = usePage(null).props;
+    const [isLoading,setIsLoading] = useState(false);
 
     //define state
     const [email, setEmail] = useState('');
@@ -17,11 +18,15 @@ function Login() {
     //method "storeLogin"
     const storeLogin  = async(e) => {
         e.preventDefault();
-
+        setIsLoading(true)
         Inertia.post(route('login.store'), {
             //data
             email: email,
             password: password,
+            onSuccess: () => {
+                setIsLoading(false)
+            },
+            onError: () => {setIsLoading(false)},
         });
     } 
 
@@ -97,7 +102,7 @@ function Login() {
                         </div>
 
                         <div className="mt-12 block">
-                            <Button type="submit" fullWidth>
+                            <Button type="submit" loading={isLoading} className="bg-light-blue-600 animate-duration-1000" fullWidth>
                                 Masuk
                             </Button>
                         </div>

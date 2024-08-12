@@ -19,7 +19,7 @@ function Sidebar() {
                         </li>
                     </Link>
                     <Link href={route('dataorang.index')} className=''>
-                        <li className={"flex px-6 py-3 " + ((route().current('dataorang.index') || route().current('dataorang.form')) ? 
+                        <li className={"flex px-6 py-3 " + ((route().current('dataorang.index') || route().current('dataorang.add') || route().current('dataorang.edit')) ? 
                             'bg-light-blue-800':'hover:bg-light-blue-600 active:bg-light-blue-800')}>
                             <FontAwesomeIcon icon={faTable} className='my-auto'/>
                             <span className='ml-6'>Data Orang</span>
