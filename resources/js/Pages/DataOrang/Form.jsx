@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios';
-import { Inertia } from '@inertiajs/inertia';
+// import { Inertia } from '@inertiajs/inertia';
 import Layout from '../../Layouts/Default';
-// import { Head, usePage, Link } from '@inertiajs/inertia-react';
 import { Head, usePage, useForm } from '@inertiajs/react';
 import {
     Input,
@@ -11,54 +10,22 @@ import {
     Typography,
     Select,
     Option,
+    Spinner
 } from "@material-tailwind/react";
 
 export default function Form() {
-    // const { errors } = usePage(null).props;
-
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [job, setJob] = useState('');
-    const [gender, setGender] = useState('Laki-Laki');
-    const [address, setAddress] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    // const [ errors, setErrors]  =  useState([]);
-
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
-        password: '',
-        remember: false,
+        name: '',
+        age: '',
+        job: '',
+        gender: '',
+        address: '',
       })
 
     const storeForm  = async(e) => {
         e.preventDefault();
-        setIsLoading(true);
-        // console.log([name,age,job,gender,address])
-        // axios.post(route('dataorang.store'), {
-        //     name: name,
-        //     age: age,
-        //     job: job,
-        //     gender: gender,
-        //     address: address,
-        //   })
-        //   .then(function (response) {
-        //     setIsLoading(false);
-        //   })
-        //   .catch(function (error) {
-        //     setIsLoading(false);
-        //     setErrors(error.response.data.errors)
-        //   });
-
-          Inertia.post(route('dataorang.store'), {
-            //data
-            name: name,
-            age: age,
-            job: job,
-            gender: gender,
-            address: address,
-            onError: (errors) => {
-                console.log('onError: '+errors)
-              },
+          post(route('dataorang.store'), {
+            data,
         });
     } 
 
@@ -94,8 +61,10 @@ export default function Form() {
                                 type="text"
                                 label="Nama Lengkap"
                                 placeholder="Masukkan nama lengkap"
-                                onChange={(e) => setName(e.target.value)}
+                                value={data.name}
+                                onChange={e => setData('name', e.target.value)}
                                 error={errors.name ? true : false}
+                                variant="standard"
                                 required
                             />
                         </div>
@@ -104,10 +73,12 @@ export default function Form() {
                             name='age'
                                 type="number"
                                 maxLength={3}
-                                onChange={(e) => setAge(e.target.value)}
+                                value={data.age}
+                                onChange={e => setData('age', e.target.value)}
                                 label="Umur"
                                 placeholder="Masukkan umur"
                                 error={errors.age ? true : false}
+                                variant="standard"
                                 required
                             />
                         </div>
@@ -117,19 +88,20 @@ export default function Form() {
                                 type="text"
                                 label="Pekerjaan"
                                 placeholder="Masukkan pekerjaan"
-                                onChange={(e) => setJob(e.target.value)}
+                                value={data.job}
+                                onChange={e => setData('job', e.target.value)}
                                 error={errors.job ? true : false}
+                                variant="standard"
                                 required
                             />
                         </div>
                         <div className="mt-8">
-                            <Select name='gender' label="Jenis Kelamin"
-                            value={gender}
-                            onChange={(val) => setGenderselect(val)}
-                            error={errors.gender ? true : false} 
-                            >
-                                <Option value="Laki-Laki">Laki-Laki</Option>
-                                <Option value="Perempuan">Perempuan</Option>
+                            <Select label='Jenis Kelamin' 
+                            onChange={e => setData('gender', e)}
+                            variant="standard"
+                            required>
+                                <Option value='Laki-Laki'>Laki-Laki</Option>
+                                <Option value='Perempuan'>Perempuan</Option>
                             </Select>
                         </div>
                         <div className="mt-8">
@@ -138,8 +110,10 @@ export default function Form() {
                                 type="text"
                                 label="Alamat"
                                 placeholder="Masukkan alamat"
-                                onChange={(e) => setAddress(e.target.value)}
+                                value={data.address}
+                                onChange={e => setData('address', e.target.value)}
                                 error={errors.address ? true : false}
+                                variant="standard"
                                 required
                             />
                         </div>
@@ -147,7 +121,8 @@ export default function Form() {
                         <div className="mt-12 block">
                             <Button
                                 type="submit"
-                                className="bg-light-blue-600"
+                                className="bg-light-blue-600 "
+                                loading={processing}
                                 fullWidth
                             >
                                 Tambah
