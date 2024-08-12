@@ -21,7 +21,6 @@ use App\Http\Controllers\DataOrangController;
 //     return inertia('Welcome');
 // });
 
-
 Route::group(['middleware' => ['auth']], function () {
 //Dashboard
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
@@ -29,6 +28,7 @@ Route::get('/dashboard', DashboardController::class)->name('dashboard');
 Route::get('/data-orang', [DataOrangController::class, 'index'])->name('dataorang.index');
 Route::get('/data-orang/show', [DataOrangController::class, 'show'])->name('dataorang.show');
 Route::get('/data-orang/form', [DataOrangController::class, 'form'])->name('dataorang.form');
+Route::post('/data-orang/form/store', [DataOrangController::class, 'store'])->name('dataorang.store');
 
 //Logout
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');

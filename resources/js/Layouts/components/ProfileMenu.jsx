@@ -17,7 +17,7 @@ export default function ProfileMenu(){
     return (
         <>
             <div>
-                <Menu>
+                <Menu dismiss={{bubbles: false}}>
                     <MenuHandler>
                         <div className='bg-blue-50 flex flex-row  pr-2 rounded-full cursor-default hover:bg-blue-100 active:hover:bg-blue-200 transition-colors'>
                             <Avatar src="/assets/img/person-icon.png" alt="avatar" variant="rounded" size="sm"/>
@@ -25,9 +25,12 @@ export default function ProfileMenu(){
                         </div>
                     </MenuHandler>
                     <MenuList>
+                        <MenuItem>
                         <Typography variant="small" className="font-medium">
                                 {auth.user.email}
                             </Typography>
+                        </MenuItem>
+                        
                     <hr className="my-2 border-blue-gray-50" />
                         <MenuItem className="flex items-center gap-2">
                             <FontAwesomeIcon icon={faGear} />

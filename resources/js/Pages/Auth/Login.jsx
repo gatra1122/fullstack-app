@@ -32,7 +32,7 @@ function Login() {
 
             <div>
                 <div className="grid lg:grid-cols-2 md:grid-cols-2 items-center gap-4">
-                    <div className="pointer-events-none max-md:order-1 h-screen min-h-full">
+                    <div className="pointer-events-none max-md:order-1 h-screen">
                         <img
                             src="/assets/img/image-3.webp"
                             className="w-full h-full object-cover"

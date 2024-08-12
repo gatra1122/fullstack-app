@@ -28,9 +28,6 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * validate request
-         */
         $data = $request->validate([
                 'name' => ['required', 'string', 'alpha:ascii'],
                 'email' => ['required', 'email', 'unique:users,email'],
@@ -52,15 +49,13 @@ class RegisterController extends Controller
             'password.confirmed' => 'Password yang anda masukkan tidak sama.',
             'password.min' => 'Password minimal 8 karakter.',
         ]);
-        /**
-         * create user
-         */
+
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        return redirect('/login')->with('status', 'Register Berhasil!');
+        return redirect()->route('login.index')->with('status', 'Register Berhasil!');
     }
 }

@@ -9,4 +9,5 @@ class DataOrang extends Model
 {
     use HasFactory;
     protected $table = 'data_orang';
+    protected $guarded = []; 
 }

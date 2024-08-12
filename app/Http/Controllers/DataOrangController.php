@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DataOrang\StoreDataOrangRequest;
 use App\Http\Resources\DataOrangResource;
 use App\Models\DataOrang;
 use Illuminate\Console\Scheduling\Event;
@@ -26,18 +27,18 @@ class DataOrangController extends Controller
         ]);
     }
 
-    // public function show(Event $event){
-    //     // DataOrang::all();
-    //     return Inertia('Event/Show', [
-    //         'event' => $event->only(
-    //           'id',
-    //           'name',
-    //           'age',
-    //           'job',
-    //           'gender',
-    //           'address',
-    //           'created_at'
-    //         ),
-    //     ]);
-    // }
+    public function store(StoreDataOrangRequest $request)
+    {
+        $data = $request->validated();
+
+        DataOrang::create([
+            'name' => $data['name'],
+            'age' => $data['age'],
+            'job' => $data['job'],
+            'gender' => $data['gender'],
+            'address' => $data['address'],
+        ]);
+
+        return redirect()->route('dataorang.index')->with('status', 'Register Berhasil!');
+    }
 }
